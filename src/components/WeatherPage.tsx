@@ -2,9 +2,11 @@ import { useEffect } from "react"
 import FetchingFunction, { Weather } from "../lib/FetchingFunction"
 
 export default function WeatherPage(){
-useEffect(() =>{
-    const weatherData: Weather = FetchingFunction
-})
+    useEffect(()=>{
+        const weatherData: Weather = ()=>{
+            FetchingFunction("Berlin", "de")
+        })
+    })
     return(
         <div>
         <div>
