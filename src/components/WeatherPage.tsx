@@ -58,11 +58,12 @@ export default function WeatherPage(){
 		})}
 		</div>
 		<div className="bg-white p-6 rounded-lg shadow-md">
-			<button
-			onClick={() => {safeCityQuerys(searchText); setSubmit(!checkSubmit)}}
-            ><FaRegHeart />
-			</button>
           <div className="mb-4">
+            <button
+            className="mr-4 text-2xl"
+			onClick={() => {safeCityQuerys(searchText); setSubmit(!checkSubmit)}}>
+            <FaRegHeart />
+			</button>
             <input 
               type="text" 
               aria-label="Eingabefeld für Stadt" 
