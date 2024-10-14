@@ -6,9 +6,30 @@ export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather>();
     const [searchText, setSearchText] = useState("Berlin")
     const [checkSubmit, setSubmit] = useState(false)
-
 	const language = "de";
-    
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') { 
+          setSubmit(!checkSubmit);
+        }
+    }
+
+	const buttonsLoved = localStorage.getItem("lovedCities");
+	const buttonsLovedCitiesArray = JSON.parse(buttonsLoved!);
+
+	console.log(buttonsLovedCitiesArray)
+ 
+	function safeCityQuerys(lovedCity: string) {
+		let cities = localStorage.getItem("lovedCities");
+		if (cities) {
+		  const cityArray: string[] = JSON.parse(cities);
+		  if (!cityArray.includes(lovedCity))
+		  	cityArray.push(lovedCity);
+		  localStorage.setItem("lovedCities", JSON.stringify(cityArray));
+		} else {
+		  localStorage.setItem("lovedCities", JSON.stringify([lovedCity]));
+		}
+	}
+
 	useEffect(() => {
 		const fetchWeather  = async () => setWeatherData(await FetchingFunction(searchText, language));
 		fetchWeather();
@@ -20,19 +41,44 @@ export default function WeatherPage(){
     const name = weatherData?.name
     return(
         <div className="font-sans flex flex-col items-center justify-center min-h-screen bg-blue-100"> 
-        <div className="bg-white p-6 rounded-lg shadow-md">
+		<div className="m-5">
+		{buttonsLovedCitiesArray?.map((el: any) => {
+  			return (
+    			<button key={el}
+				className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
+				onClick={()=> {
+						setSearchText(el);
+						setSubmit(!checkSubmit);
+					}}
+				>{el}
+				</button>
+  			);
+		})}
+		</div>
+		<div className="bg-white p-6 rounded-lg shadow-md">
+			<button
+			onClick={() => {safeCityQuerys(searchText); setSubmit(!checkSubmit)}}>
+				Herz
+			</button>
           <div className="mb-4">
             <input 
               type="text" 
               aria-label="Eingabefeld für Stadt" 
-              placeholder="Stadt" 
+              placeholder="Stadt"
+			  id="input" 
               className="border border-gray-400 px-3 py-2 rounded-lg mr-2"
-              onChange={(event) => setSearchText(event.target.value)} 
-              value={searchText} 
+              onChange={(event) => {
+					setSearchText(event.target.value);
+				}
+			  } 
+              value={searchText}
+			  onKeyDown={handleKeyDown}
             />
             <button 
               className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
-              onClick={() => setSubmit(!checkSubmit)}
+              onClick={() => {setSubmit(!checkSubmit)
+			  }
+			}
             >
               Suche
             </button>
