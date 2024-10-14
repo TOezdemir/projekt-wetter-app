@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import FetchingFunction, { Weather } from "../lib/FetchingFunction"
 import { WiCloudy, WiDaySunny, WiRain } from "react-icons/wi";
+import { FaRegHeart } from "react-icons/fa";
 
 export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather>();
@@ -8,18 +9,16 @@ export default function WeatherPage(){
     const [checkSubmit, setSubmit] = useState(false)
 	const language = "de";
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') { 
+        if (event.key === "Enter") { 
           setSubmit(!checkSubmit);
         }
     }
 
 	const buttonsLoved = localStorage.getItem("lovedCities");
 	const buttonsLovedCitiesArray = JSON.parse(buttonsLoved!);
-
-	console.log(buttonsLovedCitiesArray)
  
 	function safeCityQuerys(lovedCity: string) {
-		let cities = localStorage.getItem("lovedCities");
+		const cities = localStorage.getItem("lovedCities");
 		if (cities) {
 		  const cityArray: string[] = JSON.parse(cities);
 		  if (!cityArray.includes(lovedCity))
@@ -42,7 +41,7 @@ export default function WeatherPage(){
     return(
         <div className="font-sans flex flex-col items-center justify-center min-h-screen bg-blue-100"> 
 		<div className="m-5">
-		{buttonsLovedCitiesArray?.map((el: any) => {
+		{buttonsLovedCitiesArray?.map((el: string) => {
   			return (
     			<button key={el}
 				className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
@@ -57,8 +56,8 @@ export default function WeatherPage(){
 		</div>
 		<div className="bg-white p-6 rounded-lg shadow-md">
 			<button
-			onClick={() => {safeCityQuerys(searchText); setSubmit(!checkSubmit)}}>
-				Herz
+			onClick={() => {safeCityQuerys(searchText); setSubmit(!checkSubmit)}}
+            ><FaRegHeart />
 			</button>
           <div className="mb-4">
             <input 
