@@ -14,6 +14,7 @@ export interface Weather{
     wind: {
         speed: number
     }
+    name: string
 } 
 
 export default async function FetchingFunction(query: string, lang: string): Promise<Weather> {

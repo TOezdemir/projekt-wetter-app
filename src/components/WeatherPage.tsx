@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import FetchingFunction, { Weather } from "../lib/FetchingFunction"
+import { WiCloudy, WiDaySunny, WiRain } from "react-icons/wi";
 
 export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather>();
     const [searchText, setSearchText] = useState("Berlin")
     const [checkSubmit, setSubmit] = useState(false)
 
-	// const query = "Berlin";
 	const language = "de";
     
 	useEffect(() => {
@@ -17,6 +17,7 @@ export default function WeatherPage(){
 	const temperature = weatherData?.main.temp
     const description = weatherData?.weather[0].description
     const windSpeed = weatherData?.wind.speed
+    const name = weatherData?.name
     return(
         <div className="font-sans flex flex-col items-center justify-center min-h-screen bg-blue-100"> 
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -36,10 +37,15 @@ export default function WeatherPage(){
               Suche
             </button>
           </div>
-          {weatherData && ( // Bedingtes Rendern der Wetterdaten
-            <div>
+          {weatherData && ( // Wenn weatherData einen Wert hat (also nicht undefined oder null ist), dann zeige den Inhalt in den Klammern an.
+            <div className="flex flex-col items-center">
+                <div className="text-6xl mb-4">
+                    {weatherData.weather[0].main === "Clear" && <WiDaySunny/>}
+                    {weatherData.weather[0].main === "Clouds" && <WiCloudy/>}
+                    {weatherData.weather[0].main === "Rain" && <WiRain/>}
+                </div>
               <p className="text-xl font-semibold mb-2">
-                {description} in {searchText}
+                {description} in {name}
               </p>
               <p className="text-lg">Aktuell: {temperature}°C</p>
               <p className="text-lg">Windgeschwindigkeit: {windSpeed} m/std</p>
