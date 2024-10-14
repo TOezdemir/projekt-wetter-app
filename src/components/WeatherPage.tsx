@@ -27,10 +27,13 @@ export default function WeatherPage(){
 		} else {
 		  localStorage.setItem("lovedCities", JSON.stringify([lovedCity]));
 		}
+        // setSearchText("")    // Ah, das geht auch nicht, weil, wenn das Suchfeld geleert wird, gibt die Seite nichts aus,
+                                // also Blank. Müssen nen Failstate bauen, damit der im Fetch eine Standardausgabe hat?
 	}
 
 	useEffect(() => {
 		const fetchWeather  = async () => setWeatherData(await FetchingFunction(searchText, language));
+        // setSearchText("")    // Haha - klappt ja nicht mehr, wegen des Bookmarkings! :D
 		fetchWeather();
 	}, [checkSubmit]);
 
