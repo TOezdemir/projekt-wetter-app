@@ -37,7 +37,7 @@ export default function WeatherPage(){
               Suche
             </button>
           </div>
-          {weatherData && ( // Wenn weatherData einen Wert hat (also nicht undefined oder null ist), dann zeige den Inhalt in den Klammern an.
+          {weatherData && (
             <div className="flex flex-col items-center">
                 <div className="text-6xl mb-4">
                     {weatherData.weather[0].main === "Clear" && <WiDaySunny/>}
