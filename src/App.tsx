@@ -1,3 +1,4 @@
+import WeatherPage from "./components/WeatherPage"
 import FetchingFunction from "./lib/FetchingFunction"
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
 
   return (
     <>
-
+    <WeatherPage/>
     </>
   )
 }
