@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import FetchingFunction, { Weather } from "../lib/FetchingFunction"
 import { FaRegHeart } from "react-icons/fa";
-import RenderWeatherData from "./MainPage";
+import RenderWeatherData from "./WeatherData";
 
 export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather | null>(null);
@@ -43,12 +43,14 @@ export default function WeatherPage(){
 			<div className="m-5">
 				{buttonsLovedCitiesArray?.map((el: string) => {
   				return (
-    				<button key={el}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
-					onClick={()=> {setSearchText(el); fetchWeather();}
-					}
-					>{el}
-					</button>
+					<div className="flex justify-center">
+    					<button key={el}
+						className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
+						onClick={()=> {setSearchText(el); fetchWeather();}
+						}
+						>{el}
+						</button>
+					</div>
   				);
 				})}
 			</div>
@@ -63,6 +65,7 @@ export default function WeatherPage(){
               				className="border border-gray-400 px-3 py-2 rounded-lg mr-2"
               				onChange={(event) => setSearchText(event.target.value)}
 			  				onKeyDown={handleKeyDown}
+							value={searchText}
 					/>
             		<button 
              				className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
