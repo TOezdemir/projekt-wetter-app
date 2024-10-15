@@ -15,7 +15,7 @@ export default function WeatherPage(){
 
 	const buttonsLoved = localStorage.getItem("lovedCities");
 	const buttonsLovedCitiesArray = JSON.parse(buttonsLoved!);
- 
+	
 	function safeCityQuerys(lovedCity: string) {
 		const cities = localStorage.getItem("lovedCities");
 		if (cities) {
@@ -34,7 +34,6 @@ export default function WeatherPage(){
 
 
 	useEffect(() => {
-		const fetchWeather  = async () => setWeatherData(await FetchingFunction(searchText, language));
 		fetchWeather();
 	}, []);
 
@@ -43,14 +42,12 @@ export default function WeatherPage(){
 			<div className="m-5">
 				{buttonsLovedCitiesArray?.map((el: string) => {
   				return (
-					<div className="flex justify-center">
-    					<button key={el}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
-						onClick={()=> {setSearchText(el); fetchWeather();}
-						}
-						>{el}
-						</button>
-					</div>
+    				<button key={el}
+					className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg m-5"
+					onClick={()=> {setSearchText(el); fetchWeather();}
+					}
+					>{el}
+					</button>
   				);
 				})}
 			</div>
@@ -65,7 +62,6 @@ export default function WeatherPage(){
               				className="border border-gray-400 px-3 py-2 rounded-lg mr-2"
               				onChange={(event) => setSearchText(event.target.value)}
 			  				onKeyDown={handleKeyDown}
-							value={searchText}
 					/>
             		<button 
              				className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg"
