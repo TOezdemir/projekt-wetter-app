@@ -5,14 +5,13 @@ import RenderWeatherData from "./MainPage";
 
 export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather | null>(null);
-    const [searchText, setSearchText] = useState("")
+    const [searchText, setSearchText] = useState("Berlin")
 	const language = "de";
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") { 
           fetchWeather();
         }
     }
-
 
 	const buttonsLoved = localStorage.getItem("lovedCities");
 	const buttonsLovedCitiesArray = JSON.parse(buttonsLoved!);
