@@ -1,7 +1,6 @@
 import FetchingFunction, { Weather } from "../lib/FetchingFunction"
 import { FaRegHeart } from "react-icons/fa";
-import RenderWeatherData from "./WeatherData";
-import { ElementRef, useEffect, useRef, useState } from "react"
+import RenderWeatherData from "./MainPage";
 
 export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather | null>(null);
