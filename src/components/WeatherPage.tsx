@@ -7,6 +7,8 @@ export default function WeatherPage(){
 	const [weatherData, setWeatherData] = useState<Weather | null>(null);
     const [searchText, setSearchText] = useState("Berlin")
 	const language = "de";
+	const inputRef = useRef<ElementRef<"input">>(null)
+
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") { 
           fetchWeather();
@@ -26,17 +28,16 @@ export default function WeatherPage(){
 		} else {
 		  localStorage.setItem("lovedCities", JSON.stringify([lovedCity]));
 		}
+		setSearchText("");
 	}
 
     const fetchWeather  = async () => {
         const searchText = inputRef.current?.value
         if(searchText){
             setWeatherData(await FetchingFunction(searchText, language));
-            inputRef.current.value = ""
+            inputRef.current!.value = ""
         }
     }
-
-	const inputRef = useRef<ElementRef<"input">>(null)
 
 	useEffect(() => {
 		fetchWeather();
@@ -63,7 +64,7 @@ export default function WeatherPage(){
               				type="text" 
               				aria-label="Eingabefeld für Stadt" 
               				placeholder="Stadt"
-							id="input" 
+							ref={inputRef}
               				className="border border-gray-400 px-3 py-2 rounded-lg mr-2"
               				onChange={(event) => setSearchText(event.target.value)}
 			  				onKeyDown={handleKeyDown}
