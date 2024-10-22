@@ -78,7 +78,7 @@ export default function WeatherPage(){
           		</div>
 				{ weatherData?(
 					<RenderWeatherData {...weatherData} />
-				) : (<p>loading</p>)
+				) : (<p>Beginne mit der Suche!</p>)
 				}
       		</div>
 		</div>

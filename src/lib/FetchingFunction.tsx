@@ -21,7 +21,7 @@ export default async function FetchingFunction(query: string, lang: string): Pro
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${appid}&units=metric&lang=${lang}`)
         if(!response.ok){
-            throw new Error("Kappuuuut")
+            throw new Error("Fehler!")
         }
         const data = await response.json() as Weather
         return data
